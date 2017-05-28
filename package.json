@@ -1,0 +1,26 @@
+{
+  "name": "nodeSiteCrawlers",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EmrahKK/nodeSiteCrawlers.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/EmrahKK/nodeSiteCrawlers/issues"
+  },
+  "homepage": "https://github.com/EmrahKK/nodeSiteCrawlers#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.1",
+    "jsonfile": "^3.0.0",
+    "request": "^2.81.0",
+    "utf8": "^2.1.2"
+  }
+}
