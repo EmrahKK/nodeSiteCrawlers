@@ -51,23 +51,46 @@ collectSureContent = function(url, callback) {
 
 			let info = $('div.alert.alert-silver.text-justify.hyphenate.small').text().trim();
 			let ayetList = [];
+			let ayetMealList = [];
+			let ayetContentUrlList = [];
+			let ayetNumberList = [];
 
 			$('span.nc-verse-container').children((i, elem) => {
 				let ayetMeal = '';
 				let arContentUrl = '';
+				let ayetNumber;
 
 				if ($(elem).attr('class') === "nc-verse") {
+					ayetNumber = parseInt($(elem).text().split('\n')[1]); 
 					ayetMeal = $(elem).text().split('\n')[2];
-				}
-				if (($(elem).attr('class') === "btn btn-default btn-xs") && ($(elem).text() == "Sayfada Göster")) {
-					arContentUrl = $(elem).attr('href');
+					if (ayetNumber) {
+						ayetNumberList.push(ayetNumber);
+					}
+
+					if (ayetMeal.length > 0) {
+						ayetMealList.push(ayetMeal);
+					}
 				}
 
-				ayetList.push({
-					ayetMeal,
-					arContentUrl
-				})
+				if (($(elem).attr('class') === "btn btn-default btn-xs") && ($(elem).text() == "Sayfada Göster")) {
+					arContentUrl = $(elem).attr('href');
+					if (arContentUrl.length > 0) {
+						ayetContentUrlList.push(arContentUrl);
+					}
+				}
 			});
+
+			for (var i = 0; i < ayetMealList.length; i++) {
+				let aym = ayetMealList[i];
+				let carUrl = ayetContentUrlList[i];
+				let aynbr = ayetNumberList[i];
+
+				ayetList.push({
+					"ayetNumber":aynbr,
+					"ayetMeal": aym,
+					"arContentUrl": carUrl
+				})
+			}
 
 			callback({
 				info,
@@ -107,6 +130,6 @@ fetchArabicContent = function(url, callback) {
 }
 
 //collectSureNames('http://www.kuranayetleri.net/');
-collectSureContent('http://www.kuranayetleri.net/fatiha-suresi', (sureContent) => {
+collectSureContent('http://www.kuranayetleri.net/bakara-suresi', (sureContent) => {
 	console.log(JSON.stringify(sureContent))
 });
